@@ -199,8 +199,13 @@ BYTE CPrintPub::diagMemRecord(BYTE *pMsg, WORD32 dwMsgLen, const char *pFmt, ...
     }
     memset(pNewBuf, 0, dwLen);
 
+
+
     WORD32 dwLp =  0;
     WORD32 dwTotal =  0;
+    sprintf(pNewBuf + dwTotal, "%s", uacBuf);
+    dwTotal+= strlen(uacBuf);
+
     for(dwLp = 0;dwLp < dwMsgLen;dwLp++)
     {
         int iCur = sprintf(pNewBuf + dwTotal, "%02u",  pMsg[dwLp]);
@@ -213,7 +218,6 @@ BYTE CPrintPub::diagMemRecord(BYTE *pMsg, WORD32 dwMsgLen, const char *pFmt, ...
         dwTotal += iCur;
     }
 
-    sprintf(pNewBuf + dwTotal, "%s", uacBuf);
 
     //记录到内存，同时分片
     WORD32 dwPages =  dwLen/DIAGPAGESIZEMAX;
